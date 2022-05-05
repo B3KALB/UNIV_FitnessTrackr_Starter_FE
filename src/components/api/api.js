@@ -106,10 +106,10 @@ export const createNewRoutine = async (name, goal, isPublic) => {
           isPublic: true
         })
       })
-    const newRoutine = await response.json()
-    console.log(newRoutine)
-    return newRoutine
-    }catch(error){
-      console.error(error)
+    const newRoutine = await   response.json() 
+    console.log(newRoutine) 
+    return newRoutine 
+    }catch(error){ 
+      console.error(error) 
     }
 }
