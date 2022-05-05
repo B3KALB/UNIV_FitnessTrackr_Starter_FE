@@ -6,17 +6,25 @@ const Routines = () => {
 
     useEffect(async () => {
         const profile = await getRoutine();
+        setRoutine(profile)
+        
         console.log("Routine profile test", profile)
         console.log(profile.data.messages)
-        setctivity(profile);
+        setctivity(routine);
     }, []);
     return (
-        <>
-        <h1>Welcome, {routine.data && routine.data.routinename} </h1>
-        <div>
-            {/* this is where we'll put the routines and activities and stuff */}
-        </div>
-        </>
-    )
-}
+        <div style={''}>
+        {getRoutines.map(routine => {
+            return(
+                <div key={routine.id}>
+                    <p>{routine.creatorId}</p>
+                    <p>{routine.isPublic}</p>
+                    <p>{routine.name}</p>
+                    <p>{routine.goal}</p>
+                </div>
+            );
+        })}
+    </div>
+);
+};
     export default Routines;
