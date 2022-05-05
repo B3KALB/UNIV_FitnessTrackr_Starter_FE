@@ -11,7 +11,7 @@ const ActivitesForm = () => {
 return (
     <form id={"newActivitesForm"} onSubmit={(event) =>{
         event.preventDefault()
-        createActivity(id, name, location)
+        createActivity(id, name, description)
     }}>
         {/* Id */}
         <label>Id</label>

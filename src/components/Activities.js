@@ -6,16 +6,15 @@ const Activities = () => {
 
     useEffect(async () => {
         const profile = await getAllActivities();
-        setActivity(profile)
-        
         console.log("Activity profile test", profile)
         console.log(profile.data.messages)
-        setctivity(activity);
+        setActivity(activity)
+        
     }, []);
 
     return (
         <div style={''}>
-            {getAllActivities.map(activity => {
+            {profile.map((activity) => {
                 return(
                     <div key={activity.id}>
                         <p>{activity.name}</p>

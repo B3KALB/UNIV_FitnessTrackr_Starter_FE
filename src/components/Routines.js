@@ -6,15 +6,14 @@ const Routines = () => {
 
     useEffect(async () => {
         const profile = await getRoutine();
-        setRoutine(profile)
-        
+        setRoutine(routine)
+
         console.log("Routine profile test", profile)
         console.log(profile.data.messages)
-        setctivity(routine);
     }, []);
     return (
         <div style={''}>
-        {getRoutines.map(routine => {
+        {profile.map((routine) => {
             return(
                 <div key={routine.id}>
                     <p>{routine.creatorId}</p>
