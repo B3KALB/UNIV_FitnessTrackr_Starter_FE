@@ -1,20 +1,20 @@
 
 // CHANGE TO A FORM FOR NEW ACTIVITIES ONCE USER IS LOGGED IN 
 
-import React, { useEffect, useState } from "react";
-import { newPost } from "./api";
+import React, { useState } from "react";
+import { createActivity } from "./api";
 
-const PostForm = () => {
+const ActivitesForm = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [location, setLocation] = useState("");
-    const [delivery, setDelivery] = useState(false);
+    const [isPublic, setIsPublic] = useState(false);
 
 return (
-    <form id={"newPostForm"} onSubmit={(event) =>{
+    <form id={"newActivitesForm"} onSubmit={(event) =>{
         event.preventDefault()
-        newPost(title, description, price, location)
+        createActivity(title, description, price, location)
     }}>
         {/* Title */}
         <label>Title</label>
@@ -63,4 +63,4 @@ return (
     </form>
     )
 }
-export default PostForm;
+export default ActivitesForm;

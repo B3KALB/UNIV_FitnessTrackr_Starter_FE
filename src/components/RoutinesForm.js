@@ -2,19 +2,19 @@
 // CHANGE OVER TO BE A FORM FOR NEW ROUTINES ONCE USER IS LOGGED IN 
 
 import React, { useEffect, useState } from "react";
-import { newPost } from "./api";
+import { createNewRoutine } from "./api";
 
-const PostForm = () => {
+const RoutinesForm = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [location, setLocation] = useState("");
-    const [delivery, setDelivery] = useState(false);
+    const [isPublic, setIsPublic] = useState(false);
 
 return (
-    <form id={"newPostForm"} onSubmit={(event) =>{
+    <form id={"newRoutinesForm"} onSubmit={(event) =>{
         event.preventDefault()
-        newPost(title, description, price, location)
+        createNewRoutine(title, description, price, location)
     }}>
         {/* Title */}
         <label>Title</label>
@@ -59,4 +59,4 @@ return (
     </form>
     )
 }
-export default PostForm;
+export default RoutinesForm;
