@@ -1,62 +1,48 @@
-
-// CHANGE OVER TO BE A FORM FOR NEW ROUTINES ONCE USER IS LOGGED IN 
-
 import React, { useEffect, useState } from "react";
-import { newPost } from "./api";
+import { createRoutine } from "./api/api";
 
-const PostForm = () => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [location, setLocation] = useState("");
-    const [delivery, setDelivery] = useState(false);
+const RoutinesForm = () => {
+    const [name, setName] = useState("");
+    const [goal, setGoal] = useState("");
+    const [isPublic, setIsPublic] = useState(true);
 
 return (
-    <form id={"newPostForm"} onSubmit={(event) =>{
+    <form id={"newRoutinesForm"} onSubmit={(event) =>{
         event.preventDefault()
-        newPost(title, description, price, location)
+        createRoutine(name, goal, isPublic)
     }}>
-        {/* Title */}
-        <label>Title</label>
+        {/* Name */}
+        <label>Name</label>
         <input 
             type={"text"} 
-            value={title}
+            value={name}
             onChange={(event) => {
-            setTitle(event.target.value)
+            setName(event.target.value)
                 }}
         />
 
-        {/* Description */}
-        <label>Description</label>
+        {/* Goal */}
+        <label>Goal</label>
         <input 
             type={"text"} 
-            value={description}
+            value={goal}
             onChange={(event) => {
-            setDescription(event.target.value)
+            setGoal(event.target.value)
                 }}
         />
 
-        {/* Price */}
-        <label>Price</label>
+        {/* isPublic */}
+        <label>Public or Private</label>
         <input 
-            type={"text"} 
-            value={price}
+            type={"boolean"} 
+            value={isPublic}
             onChange={(event) => {
-            setPrice(event.target.value)
+            setIsPublic(event.target.value)
                 }}
         />
 
-        {/* Location */}
-        <label>Location</label>
-        <input 
-            type={"text"} 
-            value={location}
-            onChange={(event) => {
-            setLocation(event.target.value)
-                }}
-        />
         <button>Submit</button>
     </form>
     )
 }
-export default PostForm;
+export default RoutinesForm;

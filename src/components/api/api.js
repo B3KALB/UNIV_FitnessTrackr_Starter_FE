@@ -96,7 +96,7 @@ export const createActivity = async (name, description) => {
 }
 
 // CREATE NEW ROUTINE 
-export const createNewRoutine = async (name, goal, isPublic) => {
+export const createRoutine = async (name, goal, isPublic) => {
     try{
       const response = await fetch(`${url}/routines`, {
         method: 'POST',

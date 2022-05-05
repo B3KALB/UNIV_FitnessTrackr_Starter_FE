@@ -1,6 +1,6 @@
 // login & register need to be in here too
 import React, { useEffect, useState } from "react";
-import { login, register } from "./api"
+import { login, register } from "./api/api"
 
 const Home = (props) => {
     const {isLoggedIn, setIsLoggedIn} = props
