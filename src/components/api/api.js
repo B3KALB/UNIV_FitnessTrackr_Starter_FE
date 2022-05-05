@@ -78,7 +78,7 @@ export const getAllActivities = async () => {
 }
 
 // CREATE NEW ACTIVITY 
-export const creatActivity = async (name, description) => {
+export const createActivity = async (name, description) => {
   try{
     const response = await fetch(`${url}/activities`, {
       method: 'POST', 
@@ -95,3 +95,21 @@ export const creatActivity = async (name, description) => {
   }
 }
 
+// CREATE NEW ROUTINE 
+export const createNewRoutine = async (name, goal, isPublic) => {
+    try{
+      const response = await fetch(`${url}/routines`, {
+        method: 'POST',
+        body: JSON.stringify({
+          name: name,
+          goal: goal,
+          isPublic: true
+        })
+      })
+    const newRoutine = await response.json()
+    console.log(newRoutine)
+    return newRoutine
+    }catch(error){
+      console.error(error)
+    }
+}
