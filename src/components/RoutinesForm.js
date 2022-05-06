@@ -1,62 +1,79 @@
-
 // CHANGE OVER TO BE A FORM FOR NEW ROUTINES ONCE USER IS LOGGED IN 
 
-import React, { useEffect, useState } from "react";
-import { newPost } from "./api";
+import React, { useState } from "react";
+//import { boolean } from "yargs";
+import { createNewRoutine } from "./api/api";
 
-const PostForm = () => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [location, setLocation] = useState("");
-    const [delivery, setDelivery] = useState(false);
+const RoutinesForm = () => {
+    const [id, setId] = useState("");
+    const [creatorId, setCreatorId] = useState("");
+    const [isPublic, setIsPublic] = useState(false);
+    const [name, setName] = useState("");
+    const [goal, setGoal] = useState("");
 
 return (
-    <form id={"newPostForm"} onSubmit={(event) =>{
+    <form id={"newRoutineForm"} onSubmit={(event) =>{
         event.preventDefault()
-        newPost(title, description, price, location)
+        createNewRoutine(id, creatorId, isPublic, name, goal)
     }}>
-        {/* Title */}
-        <label>Title</label>
+        {/* Id */}
+        <label>Id</label>
         <input 
             type={"text"} 
-            value={title}
+            // placeholder={"Enter id"}
+            value={id}
             onChange={(event) => {
-            setTitle(event.target.value)
+            setId(event.target.value)
                 }}
         />
 
-        {/* Description */}
-        <label>Description</label>
+        {/* CreatorId */}
+        <label>CreatorId</label>
         <input 
             type={"text"} 
-            value={description}
+            // placeholder={"Enter CreatorId"}
+            value={creatorId}
             onChange={(event) => {
-            setDescription(event.target.value)
+            setCreatorId(event.target.value)
                 }}
         />
 
-        {/* Price */}
-        <label>Price</label>
+        {/* IsPublic */}
+        <label>IsPublic</label>
         <input 
-            type={"text"} 
-            value={price}
+            type={boolean} 
+            // placeholder={false}
+            value={isPublic}
             onChange={(event) => {
-            setPrice(event.target.value)
+            setIsPublic(event.target.value)
                 }}
         />
 
-        {/* Location */}
-        <label>Location</label>
+        {/* Name */}
+        <label>Name</label>
         <input 
             type={"text"} 
-            value={location}
+            // placeholder={"Enter name"}
+            value={name}
             onChange={(event) => {
-            setLocation(event.target.value)
+            setName(event.target.value)
+                }}
+        />
+
+        {/* Goal */}
+        <label>Goal</label>
+        <input 
+            type={"text"} 
+            // placeholder={"Enter goal"}
+            value={goal}
+            onChange={(event) => {
+            setGoal(event.target.value)
                 }}
         />
         <button>Submit</button>
     </form>
     )
 }
-export default PostForm;
+export default RoutinesForm;
+
+

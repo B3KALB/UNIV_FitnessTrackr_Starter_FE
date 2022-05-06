@@ -3,7 +3,26 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
   }
 
- body{ background-color: blue;
+input {
+  border: 1px solid black;
+}
+
+.activityForm { 
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+ body{ background-color: orange;
+}
+
+.navbar {
+  display: flex;
+}
+
+.navbar_link {
+  padding-left: 20px;
 }

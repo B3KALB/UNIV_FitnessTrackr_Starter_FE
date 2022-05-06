@@ -1,29 +1,31 @@
-
 // CHANGE TO A FORM FOR NEW ACTIVITIES ONCE USER IS LOGGED IN 
+import React, { useState } from "react";
+import { createActivity } from "./api/api";
 
-import React, { useEffect, useState } from "react";
-import { newPost } from "./api";
-
-const PostForm = () => {
-    const [title, setTitle] = useState("");
+const ActivitesForm = () => {
+    const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [location, setLocation] = useState("");
-    const [delivery, setDelivery] = useState(false);
+    const [error, setError] = useState("")
 
 return (
-    <form id={"newPostForm"} onSubmit={(event) =>{
+    <form class="activityForm" id={"newActivitesForm"} onSubmit={(event) =>{
         event.preventDefault()
-        newPost(title, description, price, location)
+        try {
+            createActivity(name, description)
+        } catch(error){
+            setError(error);
+        }
+
     }}>
-        {/* Title */}
-        <label>Title</label>
+
+        {/* Name */}
+        <label>Name</label>
         <input 
             type={"text"} 
-            // placeholder={"Enter Title"}
-            value={title}
+            // placeholder={"Enter name"}
+            value={name}
             onChange={(event) => {
-            setTitle(event.target.value)
+            setName(event.target.value)
                 }}
         />
 
@@ -31,36 +33,14 @@ return (
         <label>Description</label>
         <input 
             type={"text"} 
-            // placeholder={"Enter Description"}
+            // placeholder={"Enter description"}
             value={description}
             onChange={(event) => {
             setDescription(event.target.value)
-                }}
-        />
-
-        {/* Price */}
-        <label>Price</label>
-        <input 
-            type={"text"} 
-            // placeholder={"Enter Price"}
-            value={price}
-            onChange={(event) => {
-            setPrice(event.target.value)
-                }}
-        />
-
-        {/* Location */}
-        <label>Location</label>
-        <input 
-            type={"text"} 
-            // placeholder={"Enter Location"}
-            value={location}
-            onChange={(event) => {
-            setLocation(event.target.value)
                 }}
         />
         <button>Submit</button>
     </form>
     )
 }
-export default PostForm;
+export default ActivitesForm;
