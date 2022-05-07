@@ -8,8 +8,9 @@ const Routines = () => {
     useEffect(async () => {
         const routines = await getRoutines();
         setRoutines(routines)
+        console.log(routines)
     }, []);
-
+    // const {activities: [name, description, duration, count]} = routines
     return (
         <>
         <div id="forms">
@@ -23,6 +24,9 @@ const Routines = () => {
                         <p>Public/Private:{routine.isPublic}</p>
                         <p>Name:{routine.name}</p>
                         <p>Goal:{routine.goal}</p>
+                        {/* for each routine also need the activity 
+                        name, description, duration & count */}
+                        {/* <p>Activities:{routine.activities}</p> */}
                     </div>
                 );
             })}

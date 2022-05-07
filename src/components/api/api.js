@@ -38,7 +38,6 @@ export const login = async (username, password) => {
  console.log(data)
  localStorage.setItem("token", data.token);
  return data
-// console.log(data.data.token)
 } catch (error){
    console.error(error)
 }
@@ -61,7 +60,7 @@ export const getUser = async () => {
   }
 }
 
-// ALL ACTIVITIES
+// GET ALL ACTIVITIES
 export const getAllActivities = async () => {
   try{
     const response = await fetch(`${url}/activities`, {
@@ -76,6 +75,22 @@ export const getAllActivities = async () => {
   }
 }
 
+// GET ALL ROUTINES 
+export const getRoutines = async () => {
+  try {
+    const response = await fetch(`${url}/routines`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    const routines = await response.json();
+    return routines;
+    
+  }catch(error){
+    
+  }
+}
 // CREATE NEW ACTIVITY 
 export const createActivity = async (activityName, actDescription) => {
   try{
@@ -97,26 +112,10 @@ export const createActivity = async (activityName, actDescription) => {
   }
 }
 
-export const getRoutines = async () => {
-  try {
-    const response = await fetch(`${url}/routines`, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    const routines = await response.json();
-    return routines;
-
-  }catch(error){
-
-  }
-}
-
 // CREATE NEW ROUTINE 
 export const createRoutine = async (name, goal, isPublic) => {
-    try{
-      const response = await fetch(`${url}/routines`, {
+  try{
+    const response = await fetch(`${url}/routines`, {
         method: 'POST',
         body: JSON.stringify({
           name: name,
