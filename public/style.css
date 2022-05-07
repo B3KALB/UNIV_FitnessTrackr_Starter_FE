@@ -3,26 +3,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
   }
 
 input {
   border: 1px solid black;
 }
 
-.activityForm { 
+body{ 
+  background-color: #ff8200;
+}
+
+#navbar {
   display: flex;
-  flex-direction: column;
-  width: 30%;
+  justify-content: space-around;
+  background: white;
+  padding: 5px;
 }
 
- body{ background-color: orange;
-}
-
-.navbar {
+#forms{
   display: flex;
+  justify-content: space-evenly;
+  margin: 15px;
+  background: grey;
+  
 }
 
-.navbar_link {
-  padding-left: 20px;
+#loginbuttons{
+  border: 5px solid black;
 }

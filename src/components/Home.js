@@ -10,15 +10,12 @@ const Home = (props) => {
 
     const handleRegister = async (event) => {
         event.preventDefault()
-        console.log(username, password)
         const waitRegister = await register(username, password);
         console.log(waitRegister, "user registered")
       }
     const handleLogin = async (event) => {
           event.preventDefault()
-          console.log(loginUsername, loginPassword)
        const waitLogin = await login(loginUsername, loginPassword);
-    //    console.log(waitLogin)
       }
 
     const logout = () => {
@@ -32,7 +29,6 @@ const Home = (props) => {
           console.log("is user logged in:", getToken)
         setIsLoggedIn(getToken)
       }, []);
-      console.log("user logged in", isLoggedIn)
 
 return (
     <>

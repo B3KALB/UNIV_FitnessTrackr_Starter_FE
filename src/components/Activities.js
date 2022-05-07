@@ -4,27 +4,17 @@ import ActivitiesForm from './ActivitiesForm';
 
 const Activities = () => {
     const [activities, setActivities] = useState([]);
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
     const token = localStorage.getItem("token");
     useEffect(async () => {
-        if(!token){
-            const activities = await getAllActivities();
-            setActivities(activities)
-        }
-
-        
+        const activities = await getAllActivities();
+        setActivities(activities)
     }, []);
 
-    if(token){
-        return (
-          <>
-            <ActivitiesForm />
-          </>
-        )
-    }
-
     return (
+        <>
+        <div id="forms">
+            {token ? <ActivitiesForm/> : <p>Please Log In to Create a New Activity</p>}
+        </div>
         <div>
             {activities.map((activity) => {
                 return(
@@ -35,6 +25,7 @@ const Activities = () => {
                 );
             })}
         </div>
+        </>
     );
 };
     export default Activities;

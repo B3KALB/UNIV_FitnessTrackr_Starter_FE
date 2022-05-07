@@ -3,16 +3,12 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import Routines from "./Routines"
 import Activities from "./Activities"
 import Home from "./Home"
-import ActivitiesForm from "./ActivitiesForm"
-import RoutinesForm from "./RoutinesForm"
 import UserProfile from "./UserProfile"
 
 const App = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     useEffect(() => {
-        console.log('checking...')
       const validToken = localStorage.getItem("token")
-
       if(validToken) setIsLoggedIn(true)
     }, []);
 
@@ -20,36 +16,18 @@ const App = (props) => {
         <BrowserRouter>
             <>
                 <h1>Welcome to Fitness Tracker</h1>
-                <div id="navbar" className="navbar">
-                    <div>
-                      <Link to="/Home">Home</Link>
-                    </div>
-                    <div className="navbar_link">
-                        <Link to="/Activities">Activities</Link>
-                    </div>
-                    <div className="navbar_link">
+                <div id="navbar">
+                    <Link to="/Home">Home</Link>
+                    <Link to="/Activities">Activities</Link>
                     <Link to="/Routines">Routines</Link>
-                    </div>
-                    <div className="navbar_link">
-                    <Link to="/RoutinesForm">New Routine Form</Link>
-                    </div>
-                    <div className="navbar_link">
-                    <Link to="/ActivitiesForm">New Activity Form</Link>
-                    </div>
-                    <div className="navbar_link">
-                      <Link to="/MyRoutine">My Routines </Link>
-                    </div>
+                    <Link to="/UserProfile">My Profile </Link>
                 </div>
                 <Routes>
-                <Route path="/Activities" element={<Activities/>} />
-                <Route path="/Routines" element={<Routines />} />
-                <Route path="/Home" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
-                <Route path="/ActivitiesForm" element={isLoggedIn ? <ActivitiesForm/> : <p>Please Log In to Create a New Activity</p>} />
-                <Route path="/RoutinesForm" element=
-                   {isLoggedIn ? <RoutinesForm/> : <p>Please Log In to Create a New Routine</p>} />
-
+                    <Route path="/Activities" element={<Activities/>}/>
+                    <Route path="/Routines" element={<Routines/>}/>
+                    <Route path="/Home" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
+                    <Route path="/UserProfile" element={<UserProfile/>}/>
                 </Routes>
-            
             </>
         </BrowserRouter>
     )
