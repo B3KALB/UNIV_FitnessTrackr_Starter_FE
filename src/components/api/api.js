@@ -1,4 +1,4 @@
-const url = 'https://fitnesstrac-kr.herokuapp.com/'
+const url = 'https://fitnesstrac-kr.herokuapp.com/api'
 
 // REGISTER 
 export const register = async (username, password) => {  
