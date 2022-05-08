@@ -81,13 +81,6 @@ const MyRoutines = () => {
         </div>
       )
     }
-    
-    const isLoggedIn = !!localStorage.getItem('token')
-
-    if(!isLoggedIn) {
-      <div>Please login first before accessing your own routines</div>
-    }
-
     return (
       <>
         {renderForm()}

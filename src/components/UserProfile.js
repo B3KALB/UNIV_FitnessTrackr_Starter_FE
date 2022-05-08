@@ -8,17 +8,17 @@ const UserProfile = () => {
     const token = localStorage.getItem("token");
 
     useEffect(async () => {
-        const profile = await getUser();
+        const profile = await getUser(user);
         console.log("current user profile:", profile)
         setUser(profile);
     }, []);
     return (
         
         <div>
-            {token ? <MyRoutines/> : <p>Please Log In to view your User Profile</p>}
+            {token ? MyRoutines() : 'Please Log In to See Your Profile'}
         </div>
         
     )
 }
 
-export default UserProfile
+export default UserProfile;

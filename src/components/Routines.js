@@ -7,8 +7,8 @@ const Routines = () => {
     const [routines, setRoutines] = useState([]);
     const [name, setName] = useState('');
     const [goal, setGoal] = useState('');
-
     const [editRoutine, setEditRoutine] = useState({});
+    const token = localStorage.getItem("token");
 
     const loadRoutines = async() => {
         const routines = await getRoutines();
@@ -64,9 +64,28 @@ const Routines = () => {
             console.error("error creating: ", err);
         }
     }
+    const renderForm = () => {
+        return (
+          <div>
+            <div>Create a new Routine:</div>
+            <div>
+              Name: 
+              <input type="text" value={name} onChange={e => setName(e.target.value)} />
+            </div>
+            <div>
+              Goal: 
+              <input type="text" value={goal} onChange={e => setGoal(e.target.value)} />
+            </div>
+            <button onClick={() => createRoutine()}>Create</button>
+          </div>
+        )};
 
     return (
       <>
+        <div id="forms">
+            {token ? renderForm() : <p>Please Log In to Create a New Routine</p>}
+        </div>
+
         {renderRoutines()}
       </>
     );
