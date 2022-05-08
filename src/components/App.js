@@ -6,15 +6,15 @@ import Home from "./Home"
 import ActivitiesForm from "./ActivitiesForm"
 import RoutinesForm from "./RoutinesForm"
 import UserProfile from "./UserProfile"
+import MyRoutines from "./MyRoutines";
 
 const App = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     useEffect(() => {
-        console.log('checking...')
       const validToken = localStorage.getItem("token")
-
       if(validToken) setIsLoggedIn(true)
     }, []);
+
 
     return (
         <BrowserRouter>
@@ -38,9 +38,10 @@ const App = (props) => {
                     </div>
                     <div class="navbar_link">
                       <Link to="/MyRoutine">My Routines </Link>
-                    </div>
+                    </div>)
                 </div>
                 <Routes>
+                <Route path="/MyRoutine" element={<MyRoutines />} />
                 <Route path="/activities" element={<Activities/>} />
                 <Route path="Routines" element={<Routines />} />
                 <Route path="Home" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />

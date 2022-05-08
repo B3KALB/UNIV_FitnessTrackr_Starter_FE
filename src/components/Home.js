@@ -11,7 +11,6 @@ const Home = (props) => {
 
     const handleRegister = async (event) => {
         event.preventDefault()
-        console.log(username, password)
         const waitRegister = await register(username, password);
         console.log(waitRegister, "user registered")
       }
@@ -80,7 +79,7 @@ return (
         <button>Register</button>
     </form>
 
-      <button onClick={(event) => {
+     <button onClick={(event) => {
             event.preventDefault()
             logout();
         }}>Logout</button>

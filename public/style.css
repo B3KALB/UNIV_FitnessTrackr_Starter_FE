@@ -10,6 +10,20 @@ input {
   border: 1px solid black;
 }
 
+button { 
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+td { 
+  text-align: center;
+  border: 1px solid black;
+}
+
+th { 
+  border-bottom: 1px solid black;
+}
+
 .activityForm { 
   display: flex;
   flex-direction: column;

@@ -10,30 +10,22 @@ const ActivitesForm = () => {
 return (
     <form class="activityForm" id={"newActivitesForm"} onSubmit={(event) =>{
         event.preventDefault()
-        try {
-            createActivity(name, description)
-        } catch(error){
-            setError(error);
-        }
+        createActivity(name, description);
 
     }}>
 
-        {/* Name */}
         <label>Name</label>
         <input 
             type={"text"} 
-            // placeholder={"Enter name"}
             value={name}
             onChange={(event) => {
             setName(event.target.value)
                 }}
         />
 
-        {/* Description */}
         <label>Description</label>
         <input 
             type={"text"} 
-            // placeholder={"Enter description"}
             value={description}
             onChange={(event) => {
             setDescription(event.target.value)

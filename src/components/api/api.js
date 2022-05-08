@@ -15,7 +15,7 @@ export const register = async (name, pwd) => {
      }
    )})
    const data = await response.json()
-   console.log("response: ", data);
+   //console.log("response: ", data);
    localStorage.setItem("token", data.token)
    localStorage.setItem("curUser", name);
  } catch (error){
@@ -80,6 +80,7 @@ export const getAllActivities = async () => {
 // CREATE NEW ACTIVITY 
 export const createActivity = async (activityName, actDescription) => {
   try{
+    
     const response = await fetch(`${url}/activities`, {
       method: 'POST', 
       body: JSON.stringify({
@@ -87,16 +88,24 @@ export const createActivity = async (activityName, actDescription) => {
         description: actDescription
       }),
       headers: {
+        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem("token")
       }
     })
     const newActivity = await response.json()
-    alert("activity has been successfully created")
+    if(!response.ok) {
+      alert(`An activity with name ${activityName} already exists`);
+      throw new Error(`Activity with name ${activityName} already exists`);
+    } else {
+      alert("The activity has been created successfully");
+    }
     return newActivity
   }catch(error){
     return error;
   }
 }
+
+
 
 export const getRoutines = async () => {
   try {
@@ -115,18 +124,22 @@ export const getRoutines = async () => {
 }
 
 // CREATE NEW ROUTINE 
-export const createNewRoutine = async (name, goal, isPublic) => {
+export const createNewRoutine = async (rName, rGoal) => {
+    const bodyData = {
+      name: rName,
+      goal: rGoal,
+      isPublic: true
+    }
     try{
       const response = await fetch(`${url}/routines`, {
         method: 'POST',
-        body: JSON.stringify({
-          name: name,
-          goal: goal,
-          isPublic: true
-        })
+        body: JSON.stringify(bodyData),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem("token")
+        }
       })
-    const newRoutine = await   response.json() 
-    console.log(newRoutine) 
+    const newRoutine = await response.json() 
     return newRoutine 
     }catch(error){ 
       console.error(error) 

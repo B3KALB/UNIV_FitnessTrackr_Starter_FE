@@ -1,30 +1,74 @@
+
+   
 import React, { useEffect, useState } from "react";
-import { getRoutines } from "./api/api";
+import { getRoutines, createNewRoutine } from "./api/api";
 
 const Routines = () => {
     const [routines, setRoutines] = useState([]);
+    const [name, setName] = useState('');
+    const [goal, setGoal] = useState('');
+
+    const [editRoutine, setEditRoutine] = useState({});
+
+    const loadRoutines = async() => {
+        const routines = await getRoutines();
+        setRoutines(routines);
+    }
 
     useEffect(async () => {
-        const routines = await getRoutines();
-        setRoutines(routines)
-
-        //console.log("Routine profile test", profile)
-        //console.log(profile.data.messages)
+      loadRoutines();
     }, []);
 
+    const renderRoutines = () => {
+        return (
+          <div
+            style={{
+              marginTop: 20
+            }}
+          >
+            {routines.map(routine => {
+                const { name, id, creatorName, goal, activities } = routine;
+
+                return (
+                   <div key={id} style={{ paddingBottom: 20 }}>
+                     <div>Name: {name}</div>
+                     <div>Goal: {goal}</div>
+                     <div> Creator name: {creatorName}</div>
+                      <div>
+                        <div>Activities for this routine:</div>
+                         {activities.map(activity => {
+                            const { id,description, duration, count, name } = activity;
+                            return (
+                                <div key={id} style={{ paddingTop: 20 }}>
+                                    <div>Activity name: {name}</div>
+                                    <div>Activity description: {description}</div>
+                                    <div>Activity count: {count}</div>
+                                    <div>Activity duration: {duration}</div>
+                                </div>
+                            )
+
+                         })}
+                      </div>
+                   </div>
+                );
+             })}
+          </div>
+        )
+    }
+
+    const createRoutine = async () => {
+        try {
+            await createNewRoutine(name, goal);
+            loadRoutines();
+        } catch(err) {
+            console.error("error creating: ", err);
+        }
+    }
+
     return (
-      <div>
-        {routines.map((routine) => {
-            return(
-                <div key={routine.id}>
-                    <p>{routine.creatorId}</p>
-                    <p>{routine.isPublic}</p>
-                    <p>{routine.name}</p>
-                    <p>{routine.goal}</p>
-                </div>
-            );
-        })}
-      </div>
+      <>
+        {renderRoutines()}
+      </>
     );
 };
     export default Routines;

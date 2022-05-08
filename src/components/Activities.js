@@ -11,29 +11,22 @@ const Activities = () => {
         if(!token){
             const activities = await getAllActivities();
             setActivities(activities)
-        }
-
-        
+        }     
     }, []);
 
-    if(token){
-        return (
-          <>
-            <ActivitiesForm />
-          </>
-        )
-    }
-
     return (
-        <div>
+        <div id="forms">
+            {token ? <ActivitiesForm/> :
+        (<div>
             {activities.map((activity) => {
                 return(
                     <div key={activity.id}>
-                        <p>{activity.name}</p>
-                        <p>{activity.description}</p>
+                        <p>Name:{activity.name}</p>
+                        <p>Description:{activity.description}</p>
                     </div>
                 );
             })}
+        </div>)}
         </div>
     );
 };
