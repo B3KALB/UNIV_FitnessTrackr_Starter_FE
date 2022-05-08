@@ -38,7 +38,7 @@ const App = (props) => {
                     </div>
                     <div class="navbar_link">
                       <Link to="/MyRoutine">My Routines </Link>
-                    </div>)
+                    </div>
                 </div>
                 <Routes>
                 <Route path="/MyRoutine" element={<MyRoutines />} />
