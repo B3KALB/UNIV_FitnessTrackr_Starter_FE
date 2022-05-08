@@ -1,10 +1,11 @@
 const MyRoutines = () => {
-   const token = localStorage.getItem("token");
-   if(!token){
-       return;
-   }
 
    return (
-       <div>Routines</div>
+       <div>(this is where the user's routines and stuff will be)</div>
+
    )
 }
+
+
+
+export default MyRoutines

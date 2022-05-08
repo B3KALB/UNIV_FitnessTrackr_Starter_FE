@@ -15,31 +15,27 @@ const Activities = () => {
     const token = localStorage.getItem("token");
 
     useEffect(async () => {
-        if(!token){
-            const activities = await getAllActivities();
-            setActivities(activities);
-        }
+        const activities = await getAllActivities();
+        setActivities(activities)
     }, []);
 
-    if(token){
-        return (
-          <>
-            <ActivitiesForm />
-          </>
-        )
-    }
-
     return (
+        <>
+        <div id="forms">
+            {token ? <ActivitiesForm/> : <p>Please Log In to Create a New Activity</p>}
+        </div>
         <div>
             {activities.map( activity => {
                 return(
-                    <div style={cardStyle} key={activity.id}>
-                        <p>Name: {activity.name}</p>
-                        <p>Description: {activity.description}</p>
+
+                    <div id="cardStyle" style={cardStyle} key={activity.id}>
+                        <p>Name:{activity.name}</p>
+                        <p>Description:{activity.description}</p>
                     </div>
                 );
             })}
         </div>
+        </>
     );
 };
     export default Activities;
