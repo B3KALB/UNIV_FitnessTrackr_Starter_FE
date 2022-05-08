@@ -1,43 +1,73 @@
-import React, { useEffect, useState } from "react";
-import { getRoutines } from "./api/api";
-import RoutinesForm from "./RoutinesForm"
 
-const cardStyle = {
-    backgroundColor: 'limegreen',
-    color: 'black',
-    padding: '20px',
-    margin: '20px'
-}
+   
+import React, { useEffect, useState } from "react";
+import { getRoutines, createNewRoutine } from "./api/api";
 
 const Routines = () => {
     const [routines, setRoutines] = useState([]);
-    const token = localStorage.getItem("token");
-    useEffect(async () => {
+    const [name, setName] = useState('');
+    const [goal, setGoal] = useState('');
+
+    const [editRoutine, setEditRoutine] = useState({});
+
+    const loadRoutines = async() => {
         const routines = await getRoutines();
-        setRoutines(routines)
-        console.log(routines)
+        setRoutines(routines);
+    }
+
+    useEffect(async () => {
+      loadRoutines();
     }, []);
-    // const {activities: [name, description, duration, count]} = routines
-    return (
-        <>
-        <div id="forms">
-            {token ? <RoutinesForm/> : <p>Please Log In to Create a New Routine</p>}
-        </div>
-        <div>
-            {routines.map((routine) => {
-                return(
-                    <div id="cardStyle" style={cardStyle} key={routine.id}>
-                        <p>{routine.creatorName}</p>
-                        <p>Public/Private:{routine.isPublic}</p>
-                        <p>Name:{routine.name}</p>
-                        <p>Goal:{routine.goal}</p>
-                        {/* for each routine also need the activity 
-                        name, description, duration & count */}
-                        {/* <p>Activities:{routine.activities}</p> */}
-                    </div>
+
+    const renderRoutines = () => {
+        return (
+          <div
+            style={{
+              marginTop: 20
+            }}
+          >
+            {routines.map(routine => {
+                const { name, id, creatorName, goal, activities } = routine;
+
+                return (
+                   <div key={id} style={{ paddingBottom: 20 }}>
+                     <div>Name: {name}</div>
+                     <div>Goal: {goal}</div>
+                     <div> Creator name: {creatorName}</div>
+                      <div>
+                        <div>Activities for this routine:</div>
+                         {activities.map(activity => {
+                            const { id,description, duration, count, name } = activity;
+                            return (
+                                <div key={id} style={{ paddingTop: 20 }}>
+                                    <div>Activity name: {name}</div>
+                                    <div>Activity description: {description}</div>
+                                    <div>Activity count: {count}</div>
+                                    <div>Activity duration: {duration}</div>
+                                </div>
+                            )
+
+                         })}
+                      </div>
+                   </div>
                 );
-            })}
-        </div>
+             })}
+          </div>
+        )
+    }
+
+    const createRoutine = async () => {
+        try {
+            await createNewRoutine(name, goal);
+            loadRoutines();
+        } catch(err) {
+            console.error("error creating: ", err);
+        }
+    }
+
+    return (
+      <>
+        {renderRoutines()}
       </>
     );
 };

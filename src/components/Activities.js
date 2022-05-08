@@ -34,7 +34,7 @@ const Activities = () => {
                     </div>
                 );
             })}
-        </div>
+        </div>)
         </>
     );
 };

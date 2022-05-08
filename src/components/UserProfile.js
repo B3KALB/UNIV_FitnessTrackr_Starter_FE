@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {getUser} from "./api/api"
 import MyRoutines from "./MyRoutines"
 
+
 const UserProfile = () => {
     const [user, setUser] = useState({});
     const token = localStorage.getItem("token");

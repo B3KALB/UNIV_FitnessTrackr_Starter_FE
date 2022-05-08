@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { createRoutine } from "./api/api";
+import { createNewRoutine } from "./api/api";
 
 const RoutinesForm = () => {
     const [isPublic, setIsPublic] = useState(false);
@@ -9,8 +10,36 @@ const RoutinesForm = () => {
 return (
     <form id={"newRoutineForm"} onSubmit={(event) =>{
         event.preventDefault()
-        createRoutine(name, goal, isPublic)
-    }}>New Routine:
+        createNewRoutine(id, creatorId, isPublic, name, goal)
+    }}>
+      
+        <label>Id</label>
+        <input 
+            type={"text"} 
+            value={id}
+            onChange={(event) => {
+            setName(event.target.value)
+                }}
+        />
+
+        <label>CreatorId</label>
+        <input 
+            type={"text"} 
+            value={creatorId}
+            onChange={(event) => {
+            setGoal(event.target.value)
+                }}
+        />
+
+        <label>IsPublic</label>
+        <input 
+            type={boolean} 
+            value={isPublic}
+            onChange={(event) => {
+            setIsPublic(event.target.value)
+                }}
+        />
+
         <label>Name</label>
         <input 
             type={"text"} 
@@ -19,20 +48,13 @@ return (
             setName(event.target.value)
                 }}
         />
+
         <label>Goal</label>
         <input 
             type={"text"} 
             value={goal}
             onChange={(event) => {
             setGoal(event.target.value)
-                }}
-        />
-        <label>IsPublic</label>
-        <input 
-            type={"checkbox"} 
-            value={isPublic}
-            onChange={(event) => {
-            setIsPublic(event.target.value)
                 }}
         />
         <button>Submit</button>

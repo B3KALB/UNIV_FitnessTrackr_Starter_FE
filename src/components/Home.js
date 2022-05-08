@@ -75,7 +75,7 @@ return (
         <button>Register</button>
     </form>
 
-      <button onClick={(event) => {
+     <button onClick={(event) => {
             event.preventDefault()
             logout();
         }}>Logout</button>

@@ -4,13 +4,15 @@ import Routines from "./Routines"
 import Activities from "./Activities"
 import Home from "./Home"
 import UserProfile from "./UserProfile"
+import MyRoutines from "./MyRoutines";
 
 const App = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     useEffect(() => {
       const validToken = localStorage.getItem("token")
       if(validToken) setIsLoggedIn(true)
     }, []);
+
 
     return (
         <BrowserRouter>
@@ -23,10 +25,14 @@ const App = (props) => {
                     <Link to="/UserProfile">My Profile </Link>
                 </div>
                 <Routes>
-                    <Route path="/Activities" element={<Activities/>}/>
-                    <Route path="/Routines" element={<Routines/>}/>
-                    <Route path="/Home" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
-                    <Route path="/UserProfile" element={<UserProfile/>}/>
+                <Route path="/MyRoutine" element={<MyRoutines />} />
+                <Route path="/activities" element={<Activities/>} />
+                <Route path="Routines" element={<Routines />} />
+                <Route path="Home" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
+                <Route path="/ActivitiesForm" element={isLoggedIn ? <ActivitiesForm/> : <p>Please Log In to Create a New Activity</p>} />
+                <Route path="/RoutinesForm" element=
+                   {isLoggedIn ? <RoutinesForm/> : <p>Please Log In to Create a New Routine</p>} />
+
                 </Routes>
             </>
         </BrowserRouter>

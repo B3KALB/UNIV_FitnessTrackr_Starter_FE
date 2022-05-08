@@ -14,7 +14,7 @@ export const register = async (username, password) => {
      }
    )})
    const data = await response.json()
-   console.log("response: ", data);
+   //console.log("response: ", data);
    localStorage.setItem("token", data.token)
    localStorage.setItem("curUser", username);
  } catch (error){
@@ -88,9 +88,11 @@ export const getRoutines = async () => {
     
   }
 }
+
 // CREATE NEW ACTIVITY 
 export const createActivity = async (name, description) => {
   try{
+    
     const response = await fetch(`${url}/activities`, {
       method: 'POST', 
       headers: {
@@ -101,32 +103,41 @@ export const createActivity = async (name, description) => {
         name: name,
         description: description
       }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem("token")
+      }
     })
     const newActivity = await response.json()
-    console.log(newActivity)
-    alert("a new activity has been successfully created")
+    if(!response.ok) {
+      alert(`An activity with name ${activityName} already exists`);
+      throw new Error(`Activity with name ${activityName} already exists`);
+    } else {
+      alert("The activity has been created successfully");
+    }
     return newActivity
   }catch(error){
     return error;
   }
 }
+
 // CREATE NEW ROUTINE 
-export const createRoutine = async (name, goal, isPublic) => {
-  try{
-    const response = await fetch(`${url}/routines`, {
+export const createNewRoutine = async (rName, rGoal) => {
+    const bodyData = {
+      name: rName,
+      goal: rGoal,
+      isPublic: true
+    }
+    try{
+      const response = await fetch(`${url}/routines`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
-        },
-        body: JSON.stringify({
-          name: name,
-          goal: goal,
-          isPublic: true
-        })
+        body: JSON.stringify(bodyData),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem("token")
+        }
       })
     const newRoutine = await response.json() 
-    console.log(newRoutine) 
-    alert("a new routine has been successfully created")
     return newRoutine 
     }catch(error){ 
       console.error(error) 
