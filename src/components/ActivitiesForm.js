@@ -4,7 +4,6 @@ import { createActivity } from "./api/api";
 const ActivitiesForm = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [error, setError] = useState("")
 
 return (
     <form id={"newActivitesForm"} onSubmit={(event) =>{

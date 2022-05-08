@@ -19,7 +19,7 @@ const Routines = () => {
         <div>
             {routines.map((routine) => {
                 return(
-                    <div key={routine.id}>
+                    <div id="cardStyle" key={routine.id}>
                         <p>{routine.creatorName}</p>
                         <p>Public/Private:{routine.isPublic}</p>
                         <p>Name:{routine.name}</p>
@@ -34,4 +34,4 @@ const Routines = () => {
       </>
     );
 };
-    export default Routines;
+export default Routines;

@@ -31,3 +31,10 @@ body{
 #loginbuttons{
   border: 5px solid black;
 }
+
+#cardStyle{
+  background-color: blue;
+  color: #CCC;
+  padding: 20px;
+  margin: 20px;
+}

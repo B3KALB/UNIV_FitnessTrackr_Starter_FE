@@ -18,7 +18,7 @@ const Activities = () => {
         <div>
             {activities.map((activity) => {
                 return(
-                    <div key={activity.id}>
+                    <div id="cardStyle" key={activity.id}>
                         <p>Name:{activity.name}</p>
                         <p>Description:{activity.description}</p>
                     </div>

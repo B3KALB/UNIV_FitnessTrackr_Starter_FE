@@ -8,7 +8,7 @@ const UserProfile = () => {
 
     useEffect(async () => {
         const profile = await getUser();
-        console.log("user profile:", profile)
+        console.log("current user profile:", profile)
         setUser(profile);
     }, []);
     return (
