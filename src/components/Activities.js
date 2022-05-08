@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import {getAllActivities} from "./api/api";
 import ActivitiesForm from './ActivitiesForm';
 
+
+const cardStyle = {
+    backgroundColor: 'blue',
+    color: '#CCC',
+    padding: '20px',
+    margin: '20px'
+}
+
 const Activities = () => {
     const [activities, setActivities] = useState([]);
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
     const token = localStorage.getItem("token");
+
     useEffect(async () => {
         if(!token){
             const activities = await getAllActivities();
-            setActivities(activities)
+            setActivities(activities);
         }
-
-        
     }, []);
 
     if(token){
@@ -26,11 +31,11 @@ const Activities = () => {
 
     return (
         <div>
-            {activities.map((activity) => {
+            {activities.map( activity => {
                 return(
-                    <div key={activity.id}>
-                        <p>{activity.name}</p>
-                        <p>{activity.description}</p>
+                    <div style={cardStyle} key={activity.id}>
+                        <p>Name: {activity.name}</p>
+                        <p>Description: {activity.description}</p>
                     </div>
                 );
             })}

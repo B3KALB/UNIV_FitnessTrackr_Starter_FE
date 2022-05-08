@@ -1,7 +1,8 @@
+
 // CHANGE OVER TO BE A FORM FOR NEW ROUTINES ONCE USER IS LOGGED IN 
 
 import React, { useState } from "react";
-//import { boolean } from "yargs";
+// import { boolean } from "yargs";
 import { createNewRoutine } from "./api/api";
 
 const RoutinesForm = () => {
@@ -32,7 +33,7 @@ return (
         <input 
             type={"text"} 
             // placeholder={"Enter CreatorId"}
-            value={creatorId}
+            value={CreatorId}
             onChange={(event) => {
             setCreatorId(event.target.value)
                 }}
@@ -75,5 +76,3 @@ return (
     )
 }
 export default RoutinesForm;
-
-

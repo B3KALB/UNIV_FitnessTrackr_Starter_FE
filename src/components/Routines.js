@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getRoutines } from "./api/api";
 
+const cardStyle = {
+    backgroundColor: 'limegreen',
+    color: 'black',
+    padding: '20px',
+    margin: '20px'
+}
+
 const Routines = () => {
     const [routines, setRoutines] = useState([]);
 
@@ -16,11 +23,11 @@ const Routines = () => {
       <div>
         {routines.map((routine) => {
             return(
-                <div key={routine.id}>
-                    <p>{routine.creatorId}</p>
-                    <p>{routine.isPublic}</p>
-                    <p>{routine.name}</p>
-                    <p>{routine.goal}</p>
+                <div style={cardStyle} key={routine.id}>
+                    <p>Creator Id: {routine.creatorId}</p>
+                    <p>Is public: {routine.isPublic}</p>
+                    <p>Name: {routine.name}</p>
+                    <p>Goal: {routine.goal}</p>
                 </div>
             );
         })}
