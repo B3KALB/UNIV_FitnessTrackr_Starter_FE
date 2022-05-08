@@ -97,16 +97,12 @@ export const createActivity = async (name, description) => {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
+        Authorization: 'Bearer ' + localStorage.getItem("token")
       },
       body: JSON.stringify({
         name: name,
         description: description
       }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem("token")
-      }
     })
     const newActivity = await response.json()
     if(!response.ok) {

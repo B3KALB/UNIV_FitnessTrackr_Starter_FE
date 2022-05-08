@@ -1,7 +1,7 @@
 
    
 import React, { useEffect, useState } from "react";
-import { getRoutines, createNewRoutine } from "./api/api";
+import { getRoutines, createNewRoutine, } from "./api/api";
 
 const MyRoutines = () => {
     const [routines, setRoutines] = useState([]);
@@ -52,8 +52,8 @@ const MyRoutines = () => {
                    </div>
                 );
              })}
-          </div>
-        )
+          </div> 
+       );
     }
 
     const createRoutine = async () => {
@@ -81,11 +81,14 @@ const MyRoutines = () => {
         </div>
       )
     }
-    return (
-      <>
+    // const result = async () => {
+    //     await renderRoutines.filter(creatorName => !creatorName);
+    // }
+    return (   
+      <div>
         {renderForm()}
         {renderRoutines()}
-      </>
+      </div>
     );
 };
     export default MyRoutines;
