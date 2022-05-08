@@ -8,7 +8,6 @@ const Routines = () => {
     useEffect(async () => {
         const routines = await getRoutines();
         setRoutines(routines)
-        console.log(routines)
     }, []);
     // const {activities: [name, description, duration, count]} = routines
     return (
