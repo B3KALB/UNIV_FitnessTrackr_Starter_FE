@@ -4,9 +4,10 @@ import {getUser, getRoutines, getRoutinesByUser} from "./api/api"
 const UserProfile = () => {
     const token = localStorage.getItem("token");
     const [user, setUser] = useState({});
-    const [myRoutines, setMyRoutines] = useState([])
+    // const [myRoutines, setMyRoutines] = useState([])
     const [routines, setRoutines] = useState([]);
     
+
     useEffect(async () => {
         const routines = await getRoutines();
         setRoutines(routines)
@@ -17,12 +18,14 @@ const UserProfile = () => {
         console.log("current user:", user)
         setUser(user);
     }, []);
-    console.log(user.id)
-    const userId = user.id
-    const userRoutines = getRoutinesByUser(userId)
+    console.log(user.username)
+    const username = user.username
+    const userRoutines = getRoutinesByUser(username)
     
+    /* below just shows all the routines & activities; 
+    I could not figure out how to get user profile to only show the user's routines
+    and thus ran out of time for everything else too */
     return (
-        
         <div>
             {token ? <div>
                 {routines.map((routine) => {
@@ -50,7 +53,6 @@ const UserProfile = () => {
             })}
             </div> : <p>Please Log In to view your profile</p>}
         </div>
-        
         )
     }
     // useEffect(async ()=>{

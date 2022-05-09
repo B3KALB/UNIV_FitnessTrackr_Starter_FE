@@ -1,0 +1,43 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+input {
+  border: 1px solid black;
+}
+
+body{ 
+  background-color: #ff8200;
+}
+
+#navbar {
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  padding: 5px;
+}
+
+#forms{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 15px;
+  background: grey;
+  
+}
+
+#loginbuttons{
+  border: 5px solid black;
+}
+
+#cardStyle{
+  background-color: blue;
+  color: #CCC;
+  padding: 20px;
+  margin: 20px;
+}
+#routineActivities{
+  background-color: red;
+}

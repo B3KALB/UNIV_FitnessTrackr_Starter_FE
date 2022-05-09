@@ -84,9 +84,9 @@ export const getRoutines = async () => {
   }
 }
 // GET ROUTINES BY USER 
-export const getRoutinesByUser = async (id) => {
+export const getRoutinesByUser = async (username) => {
   try{
-    const response = await fetch(`${url}/users/${id}/routines`,{
+    const response = await fetch(`${url}/users/${username}/routines`,{
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -150,7 +150,7 @@ export const createRoutine = async (name, goal, isPublic) => {
         })
       })
     const newRoutine = await response.json() 
-    console.log(newRoutine) 
+    console.log("new routine created:", newRoutine) 
     return newRoutine 
     }catch(error){ 
       console.error(error) 
