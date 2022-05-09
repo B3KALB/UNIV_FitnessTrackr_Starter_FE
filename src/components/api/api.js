@@ -3,7 +3,7 @@ const url = 'https://fitnesstrac-kr.herokuapp.com/api'
 export const register = async (username, password) => { 
     try{ 
       const response  = await fetch(`${url}/users/register`, {
-        method: "POST",
+      method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
@@ -15,7 +15,6 @@ export const register = async (username, password) => {
    const data = await response.json()
    console.log("response: ", data);
    localStorage.setItem("token", data.token)
-   localStorage.setItem("curUser", username);
  } catch (error){
      console.error(error)
      alert("Error registering: please supply a valid username & password")
@@ -85,25 +84,25 @@ export const getRoutines = async () => {
   }
 }
 // GET ROUTINES BY USER 
-export const getRoutinesByUser = async () => {
+export const getRoutinesByUser = async (id) => {
   try{
-    const response = await fetch(`${url}/users/:username/routines`,{
+    const response = await fetch(`${url}/users/${id}/routines`,{
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       }
     })
     const userRoutines = await response.json()
-    console.log(userRoutines)
+    console.log("userRoutines:", userRoutines)
     return userRoutines
   }catch(error){
     console.log(error)
   }
 }
 // GET ROUTINE BY ACTIVITY ID
-export const getRoutinesByActivity = async () => {
+export const getRoutinesByActivityId = async (id) => {
   try{
-    const response = await fetch(`${url}/routines/:activityId/routines`,{
+    const response = await fetch(`${url}/activities/${id}/routines`,{
     headers: {
       'Content-Type': 'application/json',
     }})
@@ -158,9 +157,9 @@ export const createRoutine = async (name, goal, isPublic) => {
     }
 }
 // UPDATE ACTIVITY
-export const updateActivity = async (name, description) => {
+export const updateActivity = async (name, description, activityId) => {
   try{
-    const response = await fetch(`${url}/activities/:activityId`,{
+    const response = await fetch(`${url}/activities/${activityId}`,{
       method: 'PATCH',
       body: JSON.stringify({
         name: name,
@@ -175,9 +174,9 @@ export const updateActivity = async (name, description) => {
   }
 }
 // UPDATE ROUTINE
-export const updateRoutine = async (name, goal, isPublic) => {
+export const updateRoutine = async (name, goal, isPublic, routineId) => {
   try{
-    const response = await fetch(`${url}/routines/:routineId`,{
+    const response = await fetch(`${url}/routines/${routineId}`,{
       method: 'PATCH',
       body: JSON.stringify({
         name: name,
@@ -193,9 +192,9 @@ export const updateRoutine = async (name, goal, isPublic) => {
   }
 }
 // ADD ACTIVITY TO ROUTINE
-export const addActivity = async (activityId, count, duration) => {
+export const addActivityToRoutine = async (activityId, count, duration, id) => {
   try{
-    const response = await fetch(`${url}/routines/:routineId/activities`,{
+    const response = await fetch(`${url}/routines/${id}/activities`,{
       method: 'POST',
       body: JSON.stringify({
         activityId: activityId,
@@ -210,9 +209,9 @@ export const addActivity = async (activityId, count, duration) => {
   }
 }
 // UPDATE COUNT OR DURATION ON ROUTINE ACTIVITY
-export const updateRoutineActivities = async (count, duration)=> {
+export const updateRoutineActivities = async (count, duration, id)=> {
   try{
-    const response = await fetch(`${url}/routine_activities/:routineActivityId`,{
+    const response = await fetch(`${url}/routine_activities/${id}`,{
       method: 'PATCH',
       body: JSON.stringify({
         count: count,
@@ -226,9 +225,9 @@ export const updateRoutineActivities = async (count, duration)=> {
   }
 }
 // DELETE ROUTINE
-export const deleteRoutine = async () => {
+export const deleteRoutine = async (id) => {
   try{
-    const response = await fetch(`${url}/routines/:routineId`, {
+    const response = await fetch(`${url}/routines/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -243,9 +242,9 @@ export const deleteRoutine = async () => {
   }
 }
 // DELETE ACTIVITY FROM ROUTINE
-export const deleteActivity = async () => {
+export const deleteActivityFromRoutine = async (id) => {
   try{
-    const response = await fetch(`${url}/routine_activities/:routineActivityId`, {
+    const response = await fetch(`${url}/routine_activities/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -259,15 +258,3 @@ export const deleteActivity = async () => {
     console.error(error)
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-

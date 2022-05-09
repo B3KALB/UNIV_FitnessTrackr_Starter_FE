@@ -9,7 +9,6 @@ const Routines = () => {
         const routines = await getRoutines();
         setRoutines(routines)
     }, []);
-    // const {activities: [name, description, duration, count]} = routines
     return (
         <>
         <div id="forms">
@@ -17,15 +16,25 @@ const Routines = () => {
         </div>
         <div>
             {routines.map((routine) => {
+                const {id, creatorName, name, goal, activities} = routine
                 return(
-                    <div id="cardStyle" key={routine.id}>
-                        <p>{routine.creatorName}</p>
-                        <p>Public/Private:{routine.isPublic}</p>
-                        <p>Name:{routine.name}</p>
-                        <p>Goal:{routine.goal}</p>
-                        {/* for each routine also need the activity 
-                        name, description, duration & count */}
-                        {/* <p>Activities:{routine.activities}</p> */}
+                    <div id="cardStyle" key={id}>
+                        <p>{creatorName}</p>
+                        <p>Name:{name}</p>
+                        <p>Goal:{goal}</p>
+                        <div>Activities for this Routine:
+                            {activities.map(activity =>{
+                                const {id, name, description, duration, count} = activity;
+                                return(
+                                    <div key={id} id="routineActivities">
+                                        <div>Name:{name}</div>
+                                        <div>{description}</div>
+                                        <div>Reps:{count}</div>
+                                        <div>Sets:{duration}</div>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
                 );
             })}

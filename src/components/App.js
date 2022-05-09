@@ -5,7 +5,7 @@ import Activities from "./Activities"
 import Home from "./Home"
 import UserProfile from "./UserProfile"
 
-const App = (props) => {
+const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     useEffect(() => {
       const validToken = localStorage.getItem("token")
